@@ -2,9 +2,11 @@
 #define GOLD 20
 #define SILVER 30
 #define USER_DATA_SIZE 10
-#define RESERVE_SEATS_DATA_SIZE 3
+#define RESERVE_SEATS_DATA_SIZE 10
 #define BOOK_HISTORY_DATA_SIZE 10
 #define NUMBER_OF_SHOWS 3
+#define SUCCESS 1
+#define FAILURE
 #include <time.h>
 
 
@@ -52,7 +54,7 @@ typedef struct _user_
      int *ticket_booking_history;
      int ticket_record_size;
      int user_record_c_size;
-     Reserve_seats *reserve_ticket;
+    
      
 }User;
 
@@ -60,7 +62,8 @@ struct _reserve_seats_
 {
     int c_size;
     int t_size;
-    int ticket_number;
+    int *phone;
+    int *ticket_number;
     time_t *reserved_ticket_time;
 };
 
@@ -68,12 +71,17 @@ typedef struct _reserve_seats_ Reserve_seats;
 
 Screen* initialize_screen(int , int, int);
 Show* initialize_show(Screen *,int);
-UserData* initialize(int );
-
+UserData* initialize_user(int );
+int add_screen(Screen *,int);
+int add_show(Show *,int);
 int insert_user(UserData *, int);
 int book_ticket(int ,int);
 int reserve_ticket(int,int);
+int cancel_ticket(int);
 void show_layout();
+
+
+
 
 
 

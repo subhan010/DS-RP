@@ -34,7 +34,7 @@ Show * initialize_show(Screen *screen)
 
 }
 
-UserData* initialize(int initial_size)
+UserData* initialize_user(int initial_size)
 {
 
    UserData* userdata;
@@ -63,8 +63,8 @@ int insertUser(UserData *ud, int phone)
     (ud->user+ud->c_size)->ticket_record_size=10;
     (ud->user+ud->c_size)->ticket_booking_history=(int *)malloc(sizeof(int)*10);
     (ud->user+ud->c_size)->user_record_c_size=0;
-    (ud->user+ud->c_size)->reserve_ticket->c_size=0;
-    (ud->user+ud->c_size)->reserve_ticket->t_size=RESERVE_SEATS_DATA_SIZE;
+   // (ud->user+ud->c_size)->reserve_ticket->c_size=0;
+   // (ud->user+ud->c_size)->reserve_ticket->t_size=RESERVE_SEATS_DATA_SIZE;
    
 
     return 1;
