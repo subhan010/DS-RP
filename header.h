@@ -31,8 +31,11 @@ struct _show_
    int *gold;
    int *silver;
    int vip_seat_number;
+   int vip_count;
    int gold_seat_number;
+   int gold_count;
    int silver_seat_number;
+   int silver_count;
    time_t show_timinings;
 
 };
