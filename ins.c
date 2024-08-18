@@ -1,38 +1,9 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "header.h"
-
-Screen* initialize_screen()
-{
-
-    Screen* screen;
-
-    screen=(Screen *)malloc(sizeof(Screen));
-    screen->current_show=0;
-    screen->total_shows=NUMBER_OF_SHOWS;
-    screen->show=(Show *)malloc(sizeof(Show));
+#include <string.h>
 
 
-    // screen->vip=(int *)malloc(sizeof(int)*vip);
-    // screen->gold=(int *)malloc(sizeof(int)*gold);
-    // screen->silver=(int *)malloc(sizeof(int)*silver);
-
-    return screen;
-
-}
-
-Show * initialize_show(Screen *screen)
-{
-   if(screen->current_show==NUMBER_OF_SHOWS)
-   {
-    return NULL;
-   }
-   (screen->show+screen->current_show)->show_id=screen->current_show;
-   (screen->show+screen->current_show)->gold_seat_number=GOLD;
-   (screen->show+screen->current_show)->silver_seat_number=SILVER;
-   (screen->show+screen->current_show)->vip_seat_number=VIP;
-   //(screen->show+screen->current_show)->vip=(int *);
-
-}
 
 UserData* initialize_user(int initial_size)
 {
@@ -51,22 +22,72 @@ UserData* initialize_user(int initial_size)
 
 }
 
-int insertUser(UserData *ud, int phone)
+int insert_user(UserData *ud, char* phone)
 {
-
+    User user;
     if(ud->c_size==ud->users_data_size)
     {
         return 0;
     }
+    user.phone=phone;
+    user.ticket_record_size=10;
+    user.user_record_c_size=0;
+    user.ticket_booking_history = (Ticket*)malloc(user.ticket_record_size * sizeof(Ticket));
+      for (int i = 0; i < user.ticket_record_size; i++) {
+        user.ticket_booking_history[i].ticket = NULL; 
+    }
+
     
-    (ud->user+ud->c_size)->phone=phone;
-    (ud->user+ud->c_size)->ticket_record_size=10;
-    (ud->user+ud->c_size)->ticket_booking_history=(int *)malloc(sizeof(int)*10);
-    (ud->user+ud->c_size)->user_record_c_size=0;
-   // (ud->user+ud->c_size)->reserve_ticket->c_size=0;
-   // (ud->user+ud->c_size)->reserve_ticket->t_size=RESERVE_SEATS_DATA_SIZE;
    
 
+    
+    *(ud->user+ud->c_size)=user;
+   
+
+   
+        ud->c_size++;
     return 1;
+}
+
+int user_present(UserData *ud, char* phone,int *cur_pos)
+{
+    for(int i=0;i<ud->c_size;i++)
+    {
+        
+       if(strcmp((ud->user+i)->phone,phone)==0)
+       {
+        printf("%d found\n",i);
+        printf("\n%s\n",phone);
+        printf("%s\n",(ud->user+i)->phone);
+        printf("%d found\n",i);
+        *cur_pos=i;
+        return 1;
+       }
+
+    }
+
+    return 0;
+}
+int add_ticket_history(UserData *ud,char *ticket,int cur)
+{
+    
+    (ud->user+cur)->ticket_booking_history[(ud->user+cur)->user_record_c_size].ticket=ticket;
+    (ud->user+cur)->user_record_c_size++;
+   
+    return 1;
+}
+int show_booking_history(UserData *ud,int current_positon)
+{
+    printf("%d %d ",current_positon,ud->c_size);
+    printf("%s\n",(ud->user+current_positon)->phone);
+    printf("Ticket booking history table\n");
+    for(int i=0;i<(ud->user+current_positon)->user_record_c_size;i++)
+    {
+        
+        printf("%s\n",((ud->user+current_positon)->ticket_booking_history[i].ticket));
+    }
+     printf("Ticket booking history table ends\n");
+
+    return 0;
 }
 

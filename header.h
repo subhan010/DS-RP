@@ -7,9 +7,33 @@
 #define NUMBER_OF_SHOWS 3
 #define SUCCESS 1
 #define FAILURE
+#define MEMORY_ALLOC_FAIL NULL
+#define NUMBER_OF_USERS 10
 #include <time.h>
 
 
+struct _ticket_
+{
+  char* ticket;
+};
+typedef struct _ticket_ Ticket;
+
+struct _show_
+{
+   int show_id; 
+   int *vip;
+   int *gold;
+   int *silver;
+   int vip_c_seat;
+   int vip_t_seat;
+   int gold_t_seat;
+   int gold_c_seat;
+   int silver_t_seat;
+   int silver_c_seat;
+  char* show_timinings;
+
+};
+typedef struct _show_ Show;
 
 struct _screen_ 
 {
@@ -22,25 +46,16 @@ struct _screen_
 typedef struct _screen_ Screen;
 
 
-
-
-struct _show_
+struct _user_ 
 {
-   int show_id; 
-   int *vip;
-   int *gold;
-   int *silver;
-   int vip_seat_number;
-   int vip_count;
-   int gold_seat_number;
-   int gold_count;
-   int silver_seat_number;
-   int silver_count;
-   time_t show_timinings;
-
-};
-typedef struct _show_ Show;
-
+     char* phone;
+     Ticket* ticket_booking_history;
+     int ticket_record_size;
+     int user_record_c_size;
+    
+     
+} ;
+typedef struct _user_ User;
 
 struct _userdata_
 {
@@ -51,15 +66,7 @@ struct _userdata_
 };
 typedef struct _userdata_ UserData;
 
-typedef struct _user_ 
-{
-     int phone;
-     int *ticket_booking_history;
-     int ticket_record_size;
-     int user_record_c_size;
-    
-     
-}User;
+
 
 struct _reserve_seats_
 {
@@ -67,7 +74,7 @@ struct _reserve_seats_
     int t_size;
     int *phone;
     int *ticket_number;
-    time_t *reserved_ticket_time;
+    //time_t *reserved_ticket_time;
 };
 
 typedef struct _reserve_seats_ Reserve_seats;
@@ -77,11 +84,19 @@ Show* initialize_show(Screen *,int);
 UserData* initialize_user(int );
 int add_screen(Screen *,int);
 int add_show(Show *,int);
-int insert_user(UserData *, int);
-int book_ticket(int ,int);
+int insert_user(UserData *, char*);
+int book_ticket(UserData * ,Screen*,int,int,int,int);
 int reserve_ticket(int,int);
 int cancel_ticket(int);
 void show_layout();
+int user_present(UserData *,char*,int *);
+int show_booking_history(UserData *, int);
+int add_ticket_history(UserData *,char* ,int);
+
+
+
+//Screen data hardcoded
+Screen* hardcoded_shows();
 
 
 
