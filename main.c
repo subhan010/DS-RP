@@ -106,7 +106,7 @@ int main()
         case '4':
             /* code */
             int tp;
-            printf("1. 10:00 AM \n 2. 1:00 PM \n3. 7:00 PM \n9. Exit");
+            printf("1. 10:00 AM \n 2. 1:00 PM \n3. 7:00 PM \n");
             scanf(" %d",&tp);
             seat_layout(shows,tp);
             break;
