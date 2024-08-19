@@ -100,7 +100,7 @@ int book_ticket(UserData* ud,Screen* shows, int cur,int time,int cls, int seat_n
     
    char temp[5];
     time=time-1;
-     printf("%d ntfs\n",cls);
+   
     if(cls==1)
     {
        *((shows->show+time)->vip+(seat_no-1))=1;
@@ -119,7 +119,7 @@ int book_ticket(UserData* ud,Screen* shows, int cur,int time,int cls, int seat_n
     snprintf(temp, sizeof(temp), "%d%d%02d\0", time,cls,seat_no-1);
      
 
-     printf("%s\n",temp);
+     
 
     add_ticket_history(ud,temp,cur);
    // (ud->user+cur)->user_record_c_size++;
@@ -127,5 +127,36 @@ int book_ticket(UserData* ud,Screen* shows, int cur,int time,int cls, int seat_n
 
 }
 
+int cancel_ticket(UserData* ud,Screen* shows,int cur)
+{
+    show_booking_history(ud,cur);
+    printf("Enter the seat code to cancel the ticket\n");
+    char tem[5];
+    scanf("%s",&tem);
+
+    int time,cls;
+    int seat_no;
+    sscanf(tem,"%1d%1d%2d",&time,&cls,&seat_no);
+     
+    if(cls==1)
+    {
+       *((shows->show+time)->vip+(seat_no))=0;
+      
+    }
+    else if(cls==2)
+    { 
+        *((shows->show+time)->gold+(seat_no))=0;
+
+    }
+    else if(cls==3)
+    {
+         *((shows->show+time)->silver+(seat_no))=0;
+    }
+    
+
+
+
+
+}
 
 

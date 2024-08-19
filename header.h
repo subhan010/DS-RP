@@ -9,7 +9,7 @@
 #define FAILURE
 #define MEMORY_ALLOC_FAIL NULL
 #define NUMBER_OF_USERS 10
-#include <time.h>
+
 
 
 struct _ticket_
@@ -74,7 +74,7 @@ struct _reserve_seats_
     int t_size;
     int *phone;
     int *ticket_number;
-    //time_t *reserved_ticket_time;
+    
 };
 
 typedef struct _reserve_seats_ Reserve_seats;
@@ -87,8 +87,8 @@ int add_show(Show *,int);
 int insert_user(UserData *, char*);
 int book_ticket(UserData * ,Screen*,int,int,int,int);
 int reserve_ticket(int,int);
-int cancel_ticket(int);
-void show_layout();
+int cancel_ticket(UserData* ,Screen*, int);
+void seat_layout(Screen *,int);
 int user_present(UserData *,char*,int *);
 int show_booking_history(UserData *, int);
 int add_ticket_history(UserData *,char* ,int);

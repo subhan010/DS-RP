@@ -56,10 +56,10 @@ int user_present(UserData *ud, char* phone,int *cur_pos)
         
        if(strcmp((ud->user+i)->phone,phone)==0)
        {
-        printf("%d found\n",i);
-        printf("\n%s\n",phone);
+        printf("found\n");
+      
         printf("%s\n",(ud->user+i)->phone);
-        printf("%d found\n",i);
+    
         *cur_pos=i;
         return 1;
        }
@@ -70,8 +70,9 @@ int user_present(UserData *ud, char* phone,int *cur_pos)
 }
 int add_ticket_history(UserData *ud,char *ticket,int cur)
 {
+   
+    (ud->user+cur)->ticket_booking_history[(ud->user+cur)->user_record_c_size].ticket=strdup(ticket);
     
-    (ud->user+cur)->ticket_booking_history[(ud->user+cur)->user_record_c_size].ticket=ticket;
     (ud->user+cur)->user_record_c_size++;
    
     return 1;
@@ -84,7 +85,7 @@ int show_booking_history(UserData *ud,int current_positon)
     for(int i=0;i<(ud->user+current_positon)->user_record_c_size;i++)
     {
         
-        printf("%s\n",((ud->user+current_positon)->ticket_booking_history[i].ticket));
+        printf("%s %d \n",(ud->user+current_positon)->ticket_booking_history[i].ticket,current_positon);
     }
      printf("Ticket booking history table ends\n");
 

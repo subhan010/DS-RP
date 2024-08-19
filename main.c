@@ -33,15 +33,7 @@ int main()
     {
         printf("User already present. Logged in successfully\n");
     }
-   
-
-   
-   int n=0;
-
-   
-    
-    
-    
+       
     char opt;
    
     while(1)
@@ -78,7 +70,7 @@ int main()
             {
               seat_layout(shows,timimg_option);
               printf("Enter the class option\n");
-              printf("1.VIP 2.GOLD 3.SIlLVER\n");
+              printf("1.VIP 2.GOLD 3.SilLVER\n");
               int cls;
               int seat_no;
               scanf(" %d",&cls);
@@ -101,25 +93,27 @@ int main()
             
 
            }
-            
-
-
-
             break;
         case '2':
             /* code */
+            printf("not implemented yet\n");
             break;
         case '3':
-            printf("option 3\n");
+            
+            cancel_ticket(userdata, shows,current_position);
+
             break;
         case '4':
             /* code */
-            seat_layout(shows);
+            int tp;
+            printf("1. 10:00 AM \n 2. 1:00 PM \n3. 7:00 PM \n9. Exit");
+            scanf(" %d",&tp);
+            seat_layout(shows,tp);
             break;
         case '5':
             /* code */
            
-            printf("tes\n");
+           
             show_booking_history(userdata,current_position);
             break;
         
